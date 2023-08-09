@@ -10,12 +10,12 @@ body{
   background-color: #eef0fb;
 }
 .focus_button{
-  background-color: #adbeff;
+  background-color: #bfe2fd;
 }
 @media (max-width:700px) {
-  .buttons-conatiner{
-    left: calc(50% - 155px);
-    top: 7rem ;
+  .buttons-container{
+    left: calc(50% - 150px);
+    top: 4rem ;
     position: absolute;
   }
 }
