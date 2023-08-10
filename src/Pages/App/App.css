@@ -1,3 +1,7 @@
+:root{
+  --marine_blue :#02295a;
+  
+}
 *{
   padding: 0;
   margin: 0;
@@ -9,13 +13,61 @@ html{
 body{
   background-color: #eef0fb;
 }
+form::-webkit-scrollbar{
+  display: none;
+}
+.line-normal{
+  line-height: 2rem;
+}
+/* this classes styling divs or span to show images */
+.img{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.img_2{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.principal_image{
+  background-image: url(../../assets/bg-sidebar-desktop.svg);
+}
+/* this are icons of plans on steps */
+.arcade{
+  background-image: url(../../assets/icon-arcade.svg);
+}
+.advanced{
+  background-image: url(../../assets/icon-advanced.svg);
+}
+.pro{
+  background-image: url(../../assets/icon-pro.svg);
+}
 .focus_button{
   background-color: #bfe2fd;
 }
+.form-Container{
+  width: 90%;
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  background-color: white;
+  top: 9rem;
+  left: calc(50% - 45%);
+  border-radius: 12px;
+}
+/* colors */
+
 @media (max-width:700px) {
   .buttons-container{
     left: calc(50% - 150px);
-    top: 4rem ;
+    top: 2rem ;
     position: absolute;
+  }
+  .principal_image{
+    background-image: url(../../assets/bg-sidebar-mobile.svg);
   }
 }
