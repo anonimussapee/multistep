@@ -48,7 +48,7 @@ form::-webkit-scrollbar{
 }
 .form-Container{
   width: 90%;
-  height: 75vh;
+  height: 72vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -58,6 +58,7 @@ form::-webkit-scrollbar{
   top: 9rem;
   left: calc(50% - 45%);
   border-radius: 12px;
+  box-shadow: rgba(0, 0, 0, 0.515) 1px 1px 10px 0px ;
 }
 /* colors */
 

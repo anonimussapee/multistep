@@ -1,8 +1,13 @@
 import { useState } from 'react'
 
+const handleSubmit = (e) => {
+  e.preventDefault()
+  console.log('submit')
+}
+
 const Form1 = () => {
   return (
-    <form onSubmit={'none'}  className='w-[90%] h-[100%] overflow-y-scroll text-gray-500  flex flex-col gap-2 py-10'>
+    <form onSubmit={handleSubmit}  className='w-[90%] h-[100%] overflow-y-scroll text-gray-500  flex flex-col gap-2 py-10'>
       <h2 className='text-[2.4rem] font-extrabold text-[--marine_blue] '>Personal info</h2>
       <p className='line-normal'>Please provide your name, email, address, and phone number. </p>
       <label htmlFor="customer_name">
@@ -31,11 +36,11 @@ const Form2 = () => {
 
   const [plans, setPlans] = useState({mm:true,yy:false})
   return (
-    <form onSubmit={'none'}  className='w-[90%] h-[100%] overflow-y-scroll text-gray-500  flex flex-col gap-4 py-10'>
+    <form onSubmit={handleSubmit}  className='w-[90%] h-[100%] overflow-y-scroll text-gray-500  flex flex-col gap-4 py-10'>
       <h2 className='text-[2.4rem] font-extrabold text-[--marine_blue] '>Select your plan</h2>
       <p className='line-normal'>You have the option of monthly or yearly billing </p>
       {/* this are a options plan */}
-      <div className='flex flex-col gap-6 my-2'>
+      <div className='flex flex-col gap-3 my-2'>
         <label className={`flex gap-6 items-center border-[2px] ${active.op1 ? 'border-[--marine_blue]' : 'border-gray-300' }  rounded-xl p-4`} onClick={()=>setActive({
             op1:true,
             op2:false,
@@ -58,7 +63,7 @@ const Form2 = () => {
           <div className='flex flex-col '>
             <span className='text-[--marine_blue] text-[1.6rem] font-bold'>Advanced</span>
             {
-              plans.mm ? (<span className='text-[1.6rem] '>$12/yr</span>) : (<><span className='text-[1.6rem] '>$120/yr</span><span className='text-[--marine_blue] text-[1.6rem] font-bold'>2 months free</span></>)
+              plans.mm ? (<span className='text-[1.6rem] '>$12/mo</span>) : (<><span className='text-[1.6rem] '>$120/yr</span><span className='text-[--marine_blue] text-[1.6rem] font-bold'>2 months free</span></>)
             }
           </div>      
         </label>
@@ -71,7 +76,7 @@ const Form2 = () => {
           <div className='flex flex-col '>
             <span className='text-[--marine_blue] text-[1.6rem] font-bold'>Pro</span>
             {
-              plans.mm ? (<span className='text-[1.6rem] '>$15/yr</span>) : (<><span className='text-[1.6rem] '>$150/yr</span><span className='text-[--marine_blue] text-[1.6rem] font-bold'>2 months free</span></>)
+              plans.mm ? (<span className='text-[1.6rem] '>$15/mo</span>) : (<><span className='text-[1.6rem] '>$150/yr</span><span className='text-[--marine_blue] text-[1.6rem] font-bold'>2 months free</span></>)
             }
           </div>      
         </label>
@@ -92,7 +97,7 @@ const Form2 = () => {
 
 const Form3 = () => {
   return ( 
-    <form onSubmit={'none'}  className='w-[90%] h-[100%] overflow-y-scroll text-gray-500  flex flex-col gap-2 py-10'>
+    <form onSubmit={handleSubmit}  className='w-[90%] h-[100%] overflow-y-scroll text-gray-500  flex flex-col gap-2 py-10'>
       <h2 className='text-[2.4rem] font-extrabold text-[--marine_blue] '>Personal info</h2>
       <p className='line-normal'>Please provide your name, email, address, and phone number. </p>
       <label htmlFor="customer_name">
@@ -113,7 +118,7 @@ const Form3 = () => {
 
 const Form4 = () => {
   return (
-    <form onSubmit={'none'}  className='w-[90%] h-[100%] overflow-y-scroll text-gray-500  flex flex-col gap-2 py-10'>
+    <form onSubmit={handleSubmit}  className='w-[90%] h-[100%] overflow-y-scroll text-gray-500  flex flex-col gap-2 py-10'>
       <h2 className='text-[2.4rem] font-extrabold text-[--marine_blue] '>Personal info</h2>
       <p className='line-normal'>Please provide your name, email, address, and phone number. </p>
       <label htmlFor="customer_name">

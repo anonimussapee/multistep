@@ -1,22 +1,16 @@
 import './App.css'
 import { Steps } from '../../Components/Steps'
 import { useSteps } from '../../Components/useSteps'
-import { Form1, Form2, Form3, Form4 } from '../../Components/FormStep'
+import { ButtonChangeStep } from '../../Components/ButtonChangeStep'
 
 const App = () => {
 
-  const {step, onStep1, onStep2, onStep3, onStep4} = useSteps()
+  const {onNextButton,onBeforeButton ,inStepNumber ,inStep, step, onStep1, onStep2, onStep3, onStep4} = useSteps()
 
-  const formSteps = {
-    step1 :<Form1/>,
-    step2 :<Form2/>,
-    step3 :<Form3/>,
-    step4 :<Form4/>,
 
-  }
   
   return (
-    <section className='w-full h-[100vh] text-[1.8rem]'>
+    <section className='w-full h-[100vh] text-[1.8rem] flex justify-center'>
       {/* this container have all elements and have the responsability of will change of mediaqueries */}
       <div className='main--all-container relative'>
         {/* this container have a buttons and header image */}
@@ -33,11 +27,17 @@ const App = () => {
           </div>
 
         </div>
+        {/* this container have a logic to show form */}
         <div className='form-Container'>
-          {formSteps[(Object.keys(step))[((Object.values(step)).findIndex(item => item===true))]]}
+          {inStep}
         </div>
+
       </div>
-    
+      <div className={`w-[90%] h-[60px] flex ${inStepNumber > 0 ? 'justify-between': 'justify-end' }   absolute bottom-0`}>
+       {inStepNumber > 0  ? (<ButtonChangeStep name='Go back' colorNone={true} action={onBeforeButton}/>) : null }
+        <ButtonChangeStep name='Next Step' colorNone={false} action={onNextButton}/> 
+      </div>
+
     </section>
   )
 }
