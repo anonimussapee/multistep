@@ -34,8 +34,8 @@ const App = () => {
 
       </div>
       <div className={`w-[90%] h-[60px] flex ${inStepNumber > 0 ? 'justify-between': 'justify-end' }   absolute bottom-0`}>
-       {inStepNumber > 0  ? (<ButtonChangeStep name='Go back' colorNone={true} action={onBeforeButton}/>) : null }
-        <ButtonChangeStep name='Next Step' colorNone={false} action={onNextButton}/> 
+       {inStepNumber > 0  ? (<ButtonChangeStep name='Go back' colorNone={true} action={onBeforeButton}/>) : null } 
+       {inStepNumber === (Object.entries(step)).length -1 ? ( <ButtonChangeStep name='Confirm' colorNone={false} action={onNextButton}/>) :( <ButtonChangeStep name='Next Step' colorNone={false} action={onNextButton}/>)}
       </div>
 
     </section>

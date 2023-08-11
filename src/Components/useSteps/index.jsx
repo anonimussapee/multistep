@@ -3,6 +3,10 @@ import { Form1, Form2, Form3, Form4 } from '../../Components/FormStep'
 
 
 const useSteps = () => {
+
+  const [plans, setPlans] = useState({mm:true,yy:false})
+
+
   const [step, setStep] = useState({
     step1:true,
     step2:false,
@@ -48,10 +52,10 @@ const useSteps = () => {
   }
   
   const formSteps = {
-    step1 :<Form1/>,
-    step2 :<Form2/>,
-    step3 :<Form3/>,
-    step4 :<Form4/>,
+    step1 :<Form1 />,
+    step2 :<Form2 plans={plans} setPlans={setPlans}/>,
+    step3 :<Form3 plans={plans} setPlans={setPlans}/>,
+    step4 :<Form4 plans={plans}/>,
     
   }
 
@@ -78,7 +82,12 @@ const useSteps = () => {
       setStep(Object.fromEntries (stepsInArray))
     }
   }
+
+
+
   return {
+    plans,
+    setPlans,
     inStep,
     inStepNumber,
     onNextButton,

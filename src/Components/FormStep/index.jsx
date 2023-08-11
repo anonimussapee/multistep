@@ -26,7 +26,7 @@ const Form1 = () => {
   )
 }
 
-const Form2 = () => {
+const Form2 = ({plans, setPlans}) => {
 
   const [active, setActive] = useState({
     op1:true,
@@ -34,7 +34,6 @@ const Form2 = () => {
     op3:false
   })
 
-  const [plans, setPlans] = useState({mm:true,yy:false})
   return (
     <form onSubmit={handleSubmit}  className='w-[90%] h-[100%] overflow-y-scroll text-gray-500  flex flex-col gap-4 py-10'>
       <h2 className='text-[2.4rem] font-extrabold text-[--marine_blue] '>Select your plan</h2>
@@ -95,44 +94,98 @@ const Form2 = () => {
   )
 }
 
-const Form3 = () => {
+const Form3 = ({plans}) => {
+
+  const [active, setActive] = useState({
+    op1:false,
+    op2:false,
+    op3:false
+  })
+
+
   return ( 
     <form onSubmit={handleSubmit}  className='w-[90%] h-[100%] overflow-y-scroll text-gray-500  flex flex-col gap-2 py-10'>
-      <h2 className='text-[2.4rem] font-extrabold text-[--marine_blue] '>Personal info</h2>
-      <p className='line-normal'>Please provide your name, email, address, and phone number. </p>
-      <label htmlFor="customer_name">
-        <span className='text-[--marine_blue] text-[1.6rem]'>Name</span>
-        <input type="text" name='customer_name' className='border-[1px] border-gray-400 w-[100%] p-3 rounded-lg ' placeholder='e.g. Stephen King'/>
-      </label>
-      <label htmlFor="customer_email">
-        <span className='text-[--marine_blue] text-[1.6rem]'>Email Address</span>
-        <input type="text" name='customer_email' className='border-[1px] border-gray-400 w-[100%] p-3 rounded-lg ' placeholder='e.g. stephenking@lorem.com'/>
-      </label>
-      <label htmlFor="customer_phone">
-        <span className='text-[--marine_blue] text-[1.6rem]'>Name</span>
-        <input type="text" name='customer_phone' className='border-[1px] border-gray-400 w-[100%] p-3 rounded-lg ' placeholder='e.g.+1 234 567 890'/>
-      </label>
+      <h2 className='text-[2.4rem] font-extrabold text-[--marine_blue] '>Pick add-ons</h2>
+      <p className='line-normal'>Add-on help enhance your gaming experience. </p>
+      <div className='flex flex-col  gap-3 my-2'>
+
+        <label className={`flex gap-4 items-center justify-evenly border-[2px] ${active.op1 ? 'border-[--marine_blue]' : 'border-gray-300' }  rounded-xl p-4`} >
+          <input className=' w-[2rem] h-[2rem] rounded-2xl' type='checkbox' onClick={()=>setActive({
+            ...active,
+            op1:!active.op1,
+          })}/> 
+          <div className='flex flex-col '>
+            <span className='text-[--marine_blue] text-[1.6rem] font-bold'>Online service</span>
+           <span className='text-[1.5rem] line-normal '>Access to multiplayer games</span>
+          </div>      
+          <div className='flex flex-col '>
+            {
+              plans.mm ? (<span className='text-[1.5rem] text-[--marine_blue] '>+$1/mo</span>) : (<span className='text-[1.5rem] text-[--marine_blue]'>+$10/yr</span>)
+            }
+          </div>   
+        </label>
+
+        <label className={`flex gap-4 items-center justify-evenly border-[2px] ${active.op1 ? 'border-[--marine_blue]' : 'border-gray-300' }  rounded-xl p-4`} >
+          <input className=' w-[2rem] h-[2rem] rounded-2xl' type='checkbox' onClick={()=>setActive({
+            ...active,
+            op2:!active.op2,
+          })}/> 
+          <div className='flex flex-col '>
+            <span className='text-[--marine_blue] text-[1.6rem] font-bold'>Larger Storage</span>
+           <span className='text-[1.5rem] line-normal '>Extra 1TB of cloud save</span>
+          </div>      
+          <div className='flex flex-col '>
+            {
+              plans.mm ? (<span className='text-[1.5rem] text-[--marine_blue] '>+$2/mo</span>) : (<span className='text-[1.5rem] text-[--marine_blue]'>+$20/yr</span>)
+            }
+          </div>   
+        </label>
+
+        <label className={`flex gap-4 items-center justify-evenly border-[2px] ${active.op1 ? 'border-[--marine_blue]' : 'border-gray-300' }  rounded-xl p-4`} >
+          <input className=' w-[2rem] h-[2rem] rounded-2xl' type='checkbox' onClick={()=>setActive({
+            ...active,
+            op3:!active.op3,
+          })}/> 
+          <div className='flex flex-col '>
+            <span className='text-[--marine_blue] text-[1.6rem] font-bold'>Customizable profile</span>
+           <span className='text-[1.5rem] line-normal '>Custom theme on your profile</span>
+          </div>      
+          <div className='flex flex-col '>
+            {
+              plans.mm ? (<span className='text-[1.5rem] text-[--marine_blue] '>+$2/mo</span>) : (<span className='text-[1.5rem] text-[--marine_blue]'>+$20/yr</span>)
+            }
+          </div>   
+        </label>
+
+      </div>
     </form>
   )
 }
 
-const Form4 = () => {
+const Form4 = ({plans}) => {
   return (
     <form onSubmit={handleSubmit}  className='w-[90%] h-[100%] overflow-y-scroll text-gray-500  flex flex-col gap-2 py-10'>
-      <h2 className='text-[2.4rem] font-extrabold text-[--marine_blue] '>Personal info</h2>
-      <p className='line-normal'>Please provide your name, email, address, and phone number. </p>
-      <label htmlFor="customer_name">
-        <span className='text-[--marine_blue] text-[1.6rem]'>Name</span>
-        <input type="text" name='customer_name' className='border-[1px] border-gray-400 w-[100%] p-3 rounded-lg ' placeholder='e.g. Stephen King'/>
-      </label>
-      <label htmlFor="customer_email">
-        <span className='text-[--marine_blue] text-[1.6rem]'>Email Address</span>
-        <input type="text" name='customer_email' className='border-[1px] border-gray-400 w-[100%] p-3 rounded-lg ' placeholder='e.g. stephenking@lorem.com'/>
-      </label>
-      <label htmlFor="customer_phone">
-        <span className='text-[--marine_blue] text-[1.6rem]'>Name</span>
-        <input type="text" name='customer_phone' className='border-[1px] border-gray-400 w-[100%] p-3 rounded-lg ' placeholder='e.g.+1 234 567 890'/>
-      </label>
+      <h2 className='text-[2.4rem] font-extrabold text-[--marine_blue] '>Finishing up</h2>
+      <p className='line-normal'>Double-check everything looks OK before confirming. </p>
+      <div className='flex flex-col  gap-3 my-2 w-[100%] bg-[--cyan_light] p-4 rounded-xl'>
+        <span className='flex items-center gap-3 '>
+          <div className='flex flex-col'>
+            <span className='text-[--marine_blue] text-[1.6rem] font-bold'>Customizable profile</span>
+            <span className='text-[1.5rem] line-normal '>Custom theme on your profile</span>     
+          </div>
+          <div className='flex flex-col '>
+            {
+              plans.mm ? (<span className='text-[1.5rem] text-[--marine_blue] '>+$2/mo</span>) : (<span className='text-[1.5rem] text-[--marine_blue]'>+$20/yr</span>)
+            }
+          </div> 
+        </span>
+        <div className='w-[100%] h-1 bg-gray-300'></div>
+      </div>
+      <div className='w-[100%] h-auto py-3 flex justify-between'>
+      <span className='text-[1.5rem] '>Total (per month)</span>
+      <span className='text-[1.6rem] text-blue-800 font-bold '>$2/mo</span>
+
+      </div>
     </form>
   )
 }
