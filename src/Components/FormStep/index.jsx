@@ -5,28 +5,29 @@ const handleSubmit = (e) => {
   console.log('submit')
 }
 
-const Form1 = () => {
+const Form1 = ({opChoose, setOpChoose}) => {
+
   return (
     <form onSubmit={handleSubmit}  className='w-[90%] h-[100%] overflow-y-scroll text-gray-500  flex flex-col gap-2 py-10'>
       <h2 className='text-[2.4rem] font-extrabold text-[--marine_blue] '>Personal info</h2>
       <p className='line-normal'>Please provide your name, email, address, and phone number. </p>
       <label htmlFor="customer_name">
         <span className='text-[--marine_blue] text-[1.6rem]'>Name</span>
-        <input type="text" name='customer_name' className='border-[1px] border-gray-400 w-[100%] p-3 rounded-lg ' placeholder='e.g. Stephen King'/>
+        <input type="text" name='customer_name' className='border-[1px] border-gray-400 w-[100%] p-3 rounded-lg ' placeholder='e.g. Stephen King' value={opChoose.step1.name} onChange={(e)=>setOpChoose({...opChoose, step1:{...opChoose.step1,name:e.target.value}})}/>
       </label>
       <label htmlFor="customer_email">
         <span className='text-[--marine_blue] text-[1.6rem]'>Email Address</span>
-        <input type="text" name='customer_email' className='border-[1px] border-gray-400 w-[100%] p-3 rounded-lg ' placeholder='e.g. stephenking@lorem.com'/>
+        <input type="text" name='customer_email' className='border-[1px] border-gray-400 w-[100%] p-3 rounded-lg ' placeholder='e.g. stephenking@lorem.com' value={opChoose.step1.email} onChange={(e)=>setOpChoose({...opChoose, step1:{...opChoose.step1, email:e.target.value}})}/>
       </label>
       <label htmlFor="customer_phone">
-        <span className='text-[--marine_blue] text-[1.6rem]'>Name</span>
-        <input type="text" name='customer_phone' className='border-[1px] border-gray-400 w-[100%] p-3 rounded-lg ' placeholder='e.g.+1 234 567 890'/>
+        <span className='text-[--marine_blue] text-[1.6rem]'>Phone Number</span>
+        <input type="number" name='customer_phone' className='border-[1px] border-gray-400 w-[100%] p-3 rounded-lg ' placeholder='e.g.+1 234 567 890' value={opChoose.step1.number} onChange={(e)=>setOpChoose({...opChoose, step1:{...opChoose.step1,number:e.target.value}})}/>
       </label>
     </form>
   )
 }
 
-const Form2 = ({plans, setPlans}) => {
+const Form2 = ({plans, setPlans, opChoose, setOpChoose}) => {
 
   const [active, setActive] = useState({
     op1:true,
@@ -94,7 +95,7 @@ const Form2 = ({plans, setPlans}) => {
   )
 }
 
-const Form3 = ({plans}) => {
+const Form3 = ({plans, opChoose, setOpChoose}) => {
 
   const [active, setActive] = useState({
     op1:false,
@@ -125,7 +126,7 @@ const Form3 = ({plans}) => {
           </div>   
         </label>
 
-        <label className={`flex gap-4 items-center justify-evenly border-[2px] ${active.op1 ? 'border-[--marine_blue]' : 'border-gray-300' }  rounded-xl p-4`} >
+        <label className={`flex gap-4 items-center justify-evenly border-[2px] ${active.op2 ? 'border-[--marine_blue]' : 'border-gray-300' }  rounded-xl p-4`} >
           <input className=' w-[2rem] h-[2rem] rounded-2xl' type='checkbox' onClick={()=>setActive({
             ...active,
             op2:!active.op2,
@@ -141,7 +142,7 @@ const Form3 = ({plans}) => {
           </div>   
         </label>
 
-        <label className={`flex gap-4 items-center justify-evenly border-[2px] ${active.op1 ? 'border-[--marine_blue]' : 'border-gray-300' }  rounded-xl p-4`} >
+        <label className={`flex gap-4 items-center justify-evenly border-[2px] ${active.op3 ? 'border-[--marine_blue]' : 'border-gray-300' }  rounded-xl p-4`} >
           <input className=' w-[2rem] h-[2rem] rounded-2xl' type='checkbox' onClick={()=>setActive({
             ...active,
             op3:!active.op3,
@@ -162,7 +163,7 @@ const Form3 = ({plans}) => {
   )
 }
 
-const Form4 = ({plans}) => {
+const Form4 = ({plans, opChoose, setOpChoose}) => {
   return (
     <form onSubmit={handleSubmit}  className='w-[90%] h-[100%] overflow-y-scroll text-gray-500  flex flex-col gap-2 py-10'>
       <h2 className='text-[2.4rem] font-extrabold text-[--marine_blue] '>Finishing up</h2>

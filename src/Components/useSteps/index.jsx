@@ -6,6 +6,25 @@ const useSteps = () => {
 
   const [plans, setPlans] = useState({mm:true,yy:false})
 
+  const [opChoose, setOpChoose] = useState({
+    step1:{
+      name:'',
+      email:'',
+      number:''
+    },
+    step2:{
+      plan:'op1',
+      planBill:'mm'
+    },
+    step3:{
+      onlineService:false,
+      largeStorage:false,
+      customizableProfile:false
+    },
+    step4:{
+      confirm:false
+    }
+  })
 
   const [step, setStep] = useState({
     step1:true,
@@ -52,10 +71,10 @@ const useSteps = () => {
   }
   
   const formSteps = {
-    step1 :<Form1 />,
-    step2 :<Form2 plans={plans} setPlans={setPlans}/>,
-    step3 :<Form3 plans={plans} setPlans={setPlans}/>,
-    step4 :<Form4 plans={plans}/>,
+    step1 :<Form1 opChoose={opChoose} setOpChoose={setOpChoose}/>,
+    step2 :<Form2 plans={plans} setPlans={setPlans} opChoose={opChoose} setOpChoose={setOpChoose}/>,
+    step3 :<Form3 plans={plans}  opChoose={opChoose} setOpChoose={setOpChoose}/>,
+    step4 :<Form4 plans={plans} opChoose={opChoose} setOpChoose={setOpChoose}/>,
     
   }
 
@@ -86,6 +105,8 @@ const useSteps = () => {
 
 
   return {
+    opChoose,
+    setOpChoose,
     plans,
     setPlans,
     inStep,
