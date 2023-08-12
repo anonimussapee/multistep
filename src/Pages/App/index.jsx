@@ -5,7 +5,7 @@ import { ButtonChangeStep } from '../../Components/ButtonChangeStep'
 
 const App = () => {
 
-  const {onNextButton,onBeforeButton ,inStepNumber ,inStep, step, onStep1, onStep2, onStep3, onStep4} = useSteps()
+  const {onNextButton,onBeforeButton ,inStepNumber ,inStep, step} = useSteps()
 
 
   
@@ -19,10 +19,10 @@ const App = () => {
           {/* this container have a few buttons to complete a necessary form */}
           <div className='buttons-container flex justify-center gap-10  smMax:w-[300px] smMax:h-[65px]'>
             
-            <Steps step={step} btnAction={onStep1} number={1} stepNumber={'Step 1'} stepName={'YOUR INFO'}/>
-            <Steps step={step} btnAction={onStep2} number={2} stepNumber={'Step 2'} stepName={'SELECT PLAN'}/>
-            <Steps step={step} btnAction={onStep3} number={3} stepNumber={'Step 3'} stepName={'ADD ONS'}/>
-            <Steps step={step} btnAction={onStep4} number={4} stepNumber={'Step 4'} stepName={'SUMMARY'}/>
+            <Steps step={step}  number={1} stepNumber={'Step 1'} stepName={'YOUR INFO'}/>
+            <Steps step={step}  number={2} stepNumber={'Step 2'} stepName={'SELECT PLAN'}/>
+            <Steps step={step}  number={3} stepNumber={'Step 3'} stepName={'ADD ONS'}/>
+            <Steps step={step}  number={4} stepNumber={'Step 4'} stepName={'SUMMARY'}/>
 
           </div>
 

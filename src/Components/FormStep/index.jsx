@@ -27,13 +27,13 @@ const Form1 = ({opChoose, setOpChoose}) => {
   )
 }
 
-const Form2 = ({plans, setPlans, opChoose, setOpChoose}) => {
+const Form2 = ({opChoose, setOpChoose}) => {
 
-  const [active, setActive] = useState({
-    op1:true,
-    op2:false,
-    op3:false
-  })
+  // this are the options to set state in plan choose
+  const setoptions = [
+    {...opChoose.step2, op1:true,op2:false, op3:false, opDesc:{...opChoose.step2.opDesc, op1:{...opChoose.step2.opDesc.op1, state:true},op2:{...opChoose.step2.opDesc.op2, state:false},op3:{...opChoose.step2.opDesc.op3, state:false} } },
+    {...opChoose.step2, op1:false,op2:true, op3:false , opDesc:{...opChoose.step2.opDesc, op1:{...opChoose.step2.opDesc.op1, state:false},op2:{...opChoose.step2.opDesc.op2, state:true},op3:{...opChoose.step2.opDesc.op3, state:false} } },
+    {...opChoose.step2, op1:false,op2:false, op3:true, opDesc:{...opChoose.step2.opDesc, op1:{...opChoose.step2.opDesc.op1, state:false},op2:{...opChoose.step2.opDesc.op2, state:false},op3:{...opChoose.step2.opDesc.op3, state:true} } }]
 
   return (
     <form onSubmit={handleSubmit}  className='w-[90%] h-[100%] overflow-y-scroll text-gray-500  flex flex-col gap-4 py-10'>
@@ -41,146 +41,101 @@ const Form2 = ({plans, setPlans, opChoose, setOpChoose}) => {
       <p className='line-normal'>You have the option of monthly or yearly billing </p>
       {/* this are a options plan */}
       <div className='flex flex-col gap-3 my-2'>
-        <label className={`flex gap-6 items-center border-[2px] ${active.op1 ? 'border-[--marine_blue]' : 'border-gray-300' }  rounded-xl p-4`} onClick={()=>setActive({
-            op1:true,
-            op2:false,
-            op3:false
-          })}>
-          <span className='arcade img_2 w-[4.5rem] h-[4.5rem]' ></span>
+        {/* this logic show cards of plans in step1 */}
+        {(Object.values(opChoose.step2.opDesc)).map((item,index)=>{
+          return (<label key={item.name} className={`flex gap-6 items-center border-[2px] ${opChoose.step2[`op${index+1}`] ? 'border-[--marine_blue]' : 'border-gray-300' }  rounded-xl p-4`} onClick={()=> setOpChoose({...opChoose, step2:setoptions[index]})}>
+          <span className={`${item.imgClass} img_2 w-[4.5rem] h-[4.5rem]`} ></span>
           <div className='flex flex-col '>
-            <span className='text-[--marine_blue] text-[1.6rem] font-bold'>Arcade</span>
+            <span className='text-[--marine_blue] text-[1.6rem] font-bold'>{item.name}</span>
             {
-              plans.mm ? (<span className='text-[1.6rem] '>$9/mo</span>) : (<><span className='text-[1.6rem] '>$90/yr</span><span className='text-[--marine_blue] text-[1.6rem] font-bold'>2 months free</span></>)
+              opChoose.step2.planBill.mm ? (<span className='text-[1.6rem] '>${item.price.mm}/mo</span>) : (<><span className='text-[1.6rem] '>${item.price.yy}/yr</span><span className='text-[--marine_blue] text-[1.6rem] font-bold'>2 months free</span></>)
             }
           </div>      
-        </label>
-        <label className={`flex gap-6 items-center border-[2px] ${active.op2 ? 'border-[--marine_blue]' : 'border-gray-300' }  rounded-xl p-4`} onClick={()=>setActive({
-            op1:false,
-            op2:true,
-            op3:false
-          })}>
-          <span className='advanced img_2 w-[4.5rem] h-[4.5rem]'></span>
-          <div className='flex flex-col '>
-            <span className='text-[--marine_blue] text-[1.6rem] font-bold'>Advanced</span>
-            {
-              plans.mm ? (<span className='text-[1.6rem] '>$12/mo</span>) : (<><span className='text-[1.6rem] '>$120/yr</span><span className='text-[--marine_blue] text-[1.6rem] font-bold'>2 months free</span></>)
-            }
-          </div>      
-        </label>
-        <label className={`flex gap-6 items-center border-[2px] ${active.op3 ? 'border-[--marine_blue]' : 'border-gray-300' }  rounded-xl p-4`} onClick={()=>setActive({
-            op1:false,
-            op2:false,
-            op3:true
-          })}>
-          <span className='pro img_2 w-[4.5rem] h-[4.5rem]'></span>
-          <div className='flex flex-col '>
-            <span className='text-[--marine_blue] text-[1.6rem] font-bold'>Pro</span>
-            {
-              plans.mm ? (<span className='text-[1.6rem] '>$15/mo</span>) : (<><span className='text-[1.6rem] '>$150/yr</span><span className='text-[--marine_blue] text-[1.6rem] font-bold'>2 months free</span></>)
-            }
-          </div>      
-        </label>
+        </label>)
+        })}
+
       </div>
       {/* change plans toggle */}
       <div className='w-[250px] flex justify-evenly relative font-bold'>
-       <span className={`${plans.mm ? 'text-[--marine_blue]': ''}`}>Monthly</span>
-       <div className={`w-[37px] h-[2.2rem] rounded-2xl bg-[--marine_blue] flex items-center px-2 ${plans.mm ? 'justify-start': 'justify-end'} relative `}>
+       <span className={`${opChoose.step2.planBill.mm ? 'text-[--marine_blue]': ''}`}  onClick={()=>{
+          setOpChoose({...opChoose, step2:{...opChoose.step2 , planBill: {mm:true, yy:false} }})
+         }}>Monthly</span>
+       <div className={`w-[37px] h-[2.2rem] rounded-2xl bg-[--marine_blue] flex items-center px-2 ${opChoose.step2.planBill.mm ? 'justify-start': 'justify-end'} relative `}>
          <span className='bg-white w-[15px] h-[15px] block rounded-full' onClick={()=>{
-          setPlans({mm:!plans.mm, yy:!plans.yy })
+          setOpChoose({...opChoose, step2:{...opChoose.step2 , planBill: {mm:!opChoose.step2.planBill.mm, yy:!opChoose.step2.planBill.yy } }})
          }}></span> 
        </div> 
-       <span className={`${plans.yy ? 'text-[--marine_blue]': ''}`}>Yearly</span>
+       <span className={`${opChoose.step2.planBill.yy ? 'text-[--marine_blue]': ''}`}  onClick={()=>{
+          setOpChoose({...opChoose, step2:{...opChoose.step2 , planBill: {mm:false,  yy:true } }})
+         }}>Yearly</span>
       </div>
     </form>
   )
 }
 
-const Form3 = ({plans, opChoose, setOpChoose}) => {
-
-  const [active, setActive] = useState({
-    op1:false,
-    op2:false,
-    op3:false
-  })
-
+const Form3 = ({ opChoose, setOpChoose}) => {
 
   return ( 
     <form onSubmit={handleSubmit}  className='w-[90%] h-[100%] overflow-y-scroll text-gray-500  flex flex-col gap-2 py-10'>
       <h2 className='text-[2.4rem] font-extrabold text-[--marine_blue] '>Pick add-ons</h2>
       <p className='line-normal'>Add-on help enhance your gaming experience. </p>
       <div className='flex flex-col  gap-3 my-2'>
-
-        <label className={`flex gap-4 items-center justify-evenly border-[2px] ${active.op1 ? 'border-[--marine_blue]' : 'border-gray-300' }  rounded-xl p-4`} >
-          <input className=' w-[2rem] h-[2rem] rounded-2xl' type='checkbox' onClick={()=>setActive({
-            ...active,
-            op1:!active.op1,
-          })}/> 
+         {/* this logic show cards of plans in step1 */}
+        {(Object.values(opChoose.step3.opDesc)).map((item,index)=>{
+          return (<label key={item.name} className={`flex gap-4 items-center justify-evenly border-[2px] ${opChoose.step3[`op${index+1}`] ? 'border-[--marine_blue]' : 'border-gray-300' }  rounded-xl p-4`} >
+          <input className=' w-[2rem] h-[2rem] rounded-2xl' type='checkbox'  onClick={()=> setOpChoose({...opChoose, step3:{...opChoose.step3, [`op${index+1}`]:!opChoose.step3[`op${index+1}`],opDesc:{...opChoose.step3.opDesc,[`op${index+1}`]: {...opChoose.step3.opDesc[`op${index+1}`], state:!opChoose.step3[`op${index+1}`] }}}})}/> 
           <div className='flex flex-col '>
-            <span className='text-[--marine_blue] text-[1.6rem] font-bold'>Online service</span>
-           <span className='text-[1.5rem] line-normal '>Access to multiplayer games</span>
+            <span className='text-[--marine_blue] text-[1.6rem] font-bold'>{item.name}</span>
+           <span className='text-[1.5rem] line-normal '>{item.more}</span>
           </div>      
           <div className='flex flex-col '>
             {
-              plans.mm ? (<span className='text-[1.5rem] text-[--marine_blue] '>+$1/mo</span>) : (<span className='text-[1.5rem] text-[--marine_blue]'>+$10/yr</span>)
+              opChoose.step2.planBill.mm  ? (<span className='text-[1.5rem] text-[--marine_blue] '>+${item.price.mm}/mo</span>) : (<span className='text-[1.5rem] text-[--marine_blue]'>+${item.price.yy}/yr</span>)
             }
           </div>   
-        </label>
-
-        <label className={`flex gap-4 items-center justify-evenly border-[2px] ${active.op2 ? 'border-[--marine_blue]' : 'border-gray-300' }  rounded-xl p-4`} >
-          <input className=' w-[2rem] h-[2rem] rounded-2xl' type='checkbox' onClick={()=>setActive({
-            ...active,
-            op2:!active.op2,
-          })}/> 
-          <div className='flex flex-col '>
-            <span className='text-[--marine_blue] text-[1.6rem] font-bold'>Larger Storage</span>
-           <span className='text-[1.5rem] line-normal '>Extra 1TB of cloud save</span>
-          </div>      
-          <div className='flex flex-col '>
-            {
-              plans.mm ? (<span className='text-[1.5rem] text-[--marine_blue] '>+$2/mo</span>) : (<span className='text-[1.5rem] text-[--marine_blue]'>+$20/yr</span>)
-            }
-          </div>   
-        </label>
-
-        <label className={`flex gap-4 items-center justify-evenly border-[2px] ${active.op3 ? 'border-[--marine_blue]' : 'border-gray-300' }  rounded-xl p-4`} >
-          <input className=' w-[2rem] h-[2rem] rounded-2xl' type='checkbox' onClick={()=>setActive({
-            ...active,
-            op3:!active.op3,
-          })}/> 
-          <div className='flex flex-col '>
-            <span className='text-[--marine_blue] text-[1.6rem] font-bold'>Customizable profile</span>
-           <span className='text-[1.5rem] line-normal '>Custom theme on your profile</span>
-          </div>      
-          <div className='flex flex-col '>
-            {
-              plans.mm ? (<span className='text-[1.5rem] text-[--marine_blue] '>+$2/mo</span>) : (<span className='text-[1.5rem] text-[--marine_blue]'>+$20/yr</span>)
-            }
-          </div>   
-        </label>
+        </label>)
+        })}
 
       </div>
     </form>
   )
 }
 
-const Form4 = ({plans, opChoose, setOpChoose}) => {
+const Form4 = ({ opChoose}) => {
+
+   const principalPlan = (Object.values(opChoose.step2.opDesc))[((Object.values(opChoose.step2.opDesc)).findIndex(item=>item.state===true))]
+   const optionalPlan = (Object.values(opChoose.step3.opDesc))[((Object.values(opChoose.step3.opDesc)).findIndex(item=>item.state===true))]
+   console.log(optionalPlan)
+
   return (
     <form onSubmit={handleSubmit}  className='w-[90%] h-[100%] overflow-y-scroll text-gray-500  flex flex-col gap-2 py-10'>
       <h2 className='text-[2.4rem] font-extrabold text-[--marine_blue] '>Finishing up</h2>
       <p className='line-normal'>Double-check everything looks OK before confirming. </p>
       <div className='flex flex-col  gap-3 my-2 w-[100%] bg-[--cyan_light] p-4 rounded-xl'>
-        <span className='flex items-center gap-3 '>
-          <div className='flex flex-col'>
-            <span className='text-[--marine_blue] text-[1.6rem] font-bold'>Customizable profile</span>
-            <span className='text-[1.5rem] line-normal '>Custom theme on your profile</span>     
+        {/* this part is for principal plan */}
+ 
+        {(<span className='flex items-center gap-3  justify-between'>
+          <div className='flex flex-col '>
+            <span className='text-[--marine_blue] text-[1.6rem] font-bold'>{principalPlan.name}</span>
+            <span className='text-[1.4rem] line-normal underline-offset-4 underline'>Change</span>     
           </div>
           <div className='flex flex-col '>
             {
-              plans.mm ? (<span className='text-[1.5rem] text-[--marine_blue] '>+$2/mo</span>) : (<span className='text-[1.5rem] text-[--marine_blue]'>+$20/yr</span>)
+              opChoose.step2.planBill.mm ? (<span className='text-[1.5rem] text-[--marine_blue] '>+${principalPlan.price.mm}/mo</span>) : (<span className='text-[1.5rem] text-[--marine_blue]'>+${principalPlan.price.yy}/yr</span>)
             }
           </div> 
-        </span>
+        </span>)
+        }
+        {/* this is a line to separate plan of plans alternative */}
         <div className='w-[100%] h-1 bg-gray-300'></div>
+        {/* in here going to show plans alternative */}
+
+        {
+          (<div className='w-[100%] h-auto py-3 flex justify-between'>
+          <span className='text-[1.4rem] '>{optionalPlan.name}</span>
+          <span className='text-[1.5rem] text-[--marine_blue]'>{opChoose.step2.planBill.mm ? `$${optionalPlan.price.mm}/mo`: `$${optionalPlan.price.yy}/yr`}</span>
+        </div>)
+        }
       </div>
       <div className='w-[100%] h-auto py-3 flex justify-between'>
       <span className='text-[1.5rem] '>Total (per month)</span>
