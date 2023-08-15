@@ -72,12 +72,16 @@ const useSteps = () => {
     step4:false,
   })
    
+  // function to change a plan in 4step
+  const changePlan = () => {
+    setStep({step1:false, step2:true,step3:false,step4:false})
+    }
 
   const formSteps = {
     step1 :<Form1 opChoose={opChoose} setOpChoose={setOpChoose}/>,
     step2 :<Form2  opChoose={opChoose} setOpChoose={setOpChoose}/>,
     step3 :<Form3 plans={opChoose.step2.planBill}  opChoose={opChoose} setOpChoose={setOpChoose}/>,
-    step4 :<Form4 opChoose={opChoose} />,
+    step4 :<Form4 opChoose={opChoose}  changePlan={changePlan}/>,
     
   }
 
@@ -110,7 +114,7 @@ const useSteps = () => {
     }
   }
 
-
+  const onConfirm = () => setOpChoose({...opChoose, step4: {confirm:true}})
 
   return {
     stepNeedData,
@@ -121,7 +125,9 @@ const useSteps = () => {
     inStepNumber,
     onNextButton,
     onBeforeButton,
+    onConfirm,
     step,
+    changePlan
     }
 }
 export {useSteps}

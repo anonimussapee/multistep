@@ -5,17 +5,17 @@ import { ButtonChangeStep } from '../../Components/ButtonChangeStep'
 
 const App = () => {
 
-  const {onNextButton,onBeforeButton ,inStepNumber ,inStep, step} = useSteps()
+  const {onNextButton,onBeforeButton, onConfirm, opChoose ,inStepNumber ,inStep, step} = useSteps()
 
 
   
   return (
-    <section className='w-full h-[100vh] text-[1.8rem] flex justify-center'>
+    <section className='w-full h-[100vh] text-[1.8rem] flex justify-center items-center'>
       {/* this container have all elements and have the responsability of will change of mediaqueries */}
       <div className='main--all-container relative'>
         {/* this container have a buttons and header image */}
         <div className='main--slidebar-container relative'>
-          <div className=' principal_image img_2 min-w-[320px] w-[100vw] max-w-[700px] h-[200px]'></div>
+          <div className=' principal_image img_2 min-w-[320px]  '></div>
           {/* this container have a few buttons to complete a necessary form */}
           <div className='buttons-container flex justify-center gap-10  smMax:w-[300px] smMax:h-[65px]'>
             
@@ -33,9 +33,11 @@ const App = () => {
         </div>
 
       </div>
-      <div className={`w-[90%] h-[60px] flex ${inStepNumber > 0 ? 'justify-between': 'justify-end' }   absolute bottom-0`}>
+      <div className={`w-[90%] h-[60px] flex ${inStepNumber > 0 ? 'justify-between': 'justify-end'  } ${opChoose.step4.confirm  && 'hidden'}  absolute bottom-0`}>
+        
        {inStepNumber > 0  ? (<ButtonChangeStep name='Go back' colorNone={true} action={onBeforeButton}/>) : null } 
-       {inStepNumber === (Object.entries(step)).length -1 ? ( <ButtonChangeStep name='Confirm' colorNone={false} action={onNextButton}/>) :( <ButtonChangeStep name='Next Step' colorNone={false} action={onNextButton}/>)}
+       {inStepNumber === (Object.entries(step)).length -1 ? ( <ButtonChangeStep name='Confirm' colorNone={false} action={onConfirm}/>) :( <ButtonChangeStep name='Next Step' colorNone={false} action={onNextButton}/>)}
+       
       </div>
 
     </section>
