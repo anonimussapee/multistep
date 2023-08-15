@@ -112,48 +112,10 @@ const Form4 = ({ opChoose, changePlan}) => {
    const totalBill = (opChoose.step2.planBill.mm  && principalPlan.price.mm + optionalPlan.reduce((acc,item,)=>acc+item.price.mm, initialValue)) || principalPlan.price.yy + optionalPlan.reduce((acc,item,)=>acc+item.price.yy, initialValue)
   return (
     <>
-      <form key={'form4'} onSubmit={handleSubmit}  className='w-[90%] h-[100%] overflow-y-scroll text-gray-500  flex flex-col gap-2 py-10'>
       
-
-        <h2 className='text-[2.4rem] font-extrabold text-[--marine_blue] '>Finishing up</h2>
-        <p className='line-normal'>Double-check everything looks OK before confirming. </p>
-        <div className='flex flex-col  gap-3 my-2 w-[100%] bg-[--cyan_light] p-4 rounded-xl h-[50vh] overflow-y-scroll'>
-          {/* this part is for principal plan */}
-  
-          {(<span className='flex items-center gap-3  justify-between' >
-            <div className='flex flex-col '>
-              <span className='text-[--marine_blue] text-[1.6rem] font-bold'>{principalPlan.name} (Monthly)</span>
-              <span className='text-[1.4rem] line-normal underline-offset-4 underline' onClick={()=>{changePlan()}}>Change</span>     
-            </div>
-            <div className='flex flex-col '>
-              {
-                opChoose.step2.planBill.mm ? (<span className='text-[1.5rem] text-[--marine_blue] '>${principalPlan.price.mm}/mo</span>) : (<span className='text-[1.5rem] text-[--marine_blue]'>${principalPlan.price.yy}/yr</span>)
-              }
-            </div> 
-          </span>)
-          }
-          {/* this is a line to separate plan of plans alternative */}
-          <div className='w-[100%] h-1 bg-gray-300'></div>
-          {/* in here going to show plans alternative */}
-
-          { optionalPlan?.map((item,index)=>{
-            return (<div className='w-[100%] h-auto py-3 flex justify-between' key={index}>
-            <span className='text-[1.4rem] ' >{item?.name}</span>
-            <span className='text-[1.5rem] text-[--marine_blue]'>+{opChoose.step2.planBill.mm ? `$${item?.price.mm}/mo`: `$${item?.price.yy}/yr`}</span>
-          </div>)
-          })
-            
-          }
-        </div>
-        <div className='w-[100%] h-auto py-3 flex justify-between '>
-        <span className='text-[1.5rem] '>Total {opChoose.step2.planBill.mm ? '(per month)' : '(per year)' }</span>
-        <span className='text-[1.6rem] text-blue-800 font-bold '>{opChoose.step2.planBill.mm && '+'}${totalBill}{opChoose.step2.planBill.mm ? '/mo' : '/yr' }</span>
-
-        </div>
-      </form>
       { 
-      opChoose.step4.confirm && (
-      <div key={'success'} className='w-[90%] h-[70vh]  bg-white absolute flex flex-col items-center justify-center  text-gray-500 text-center gap-5'>
+      (opChoose.step4.confirm && (
+      <div key={'success'} className='w-[90%] sm:w-[40vw] h-[70vh]  bg-white absolute flex flex-col items-center justify-center  text-gray-500 text-center gap-5'>
         <img src={confirmImg} alt="succes Img" />
         <div className='flex flex-col gap3'>
           <h2 className='text-[2.4rem] font-extrabold text-[--marine_blue] '>Thank you!</h2>
@@ -161,7 +123,45 @@ const Form4 = ({ opChoose, changePlan}) => {
         </div>
       </div>
 
-      )
+      )) || (<form key={'form4'} onSubmit={handleSubmit}  className='w-[90%] h-[100%] overflow-y-scroll text-gray-500  flex flex-col gap-2 py-10'>
+      
+
+      <h2 className='text-[2.4rem] font-extrabold text-[--marine_blue] '>Finishing up</h2>
+      <p className='line-normal'>Double-check everything looks OK before confirming. </p>
+      <div className='flex flex-col  gap-3 my-2 w-[100%] bg-[--cyan_light] p-4 rounded-xl h-[50vh] overflow-y-scroll'>
+        {/* this part is for principal plan */}
+
+        {(<span className='flex items-center gap-3  justify-between' >
+          <div className='flex flex-col '>
+            <span className='text-[--marine_blue] text-[1.6rem] font-bold'>{principalPlan.name} (Monthly)</span>
+            <span className='text-[1.4rem] line-normal underline-offset-4 underline' onClick={()=>{changePlan()}}>Change</span>     
+          </div>
+          <div className='flex flex-col '>
+            {
+              opChoose.step2.planBill.mm ? (<span className='text-[1.5rem] text-[--marine_blue] '>${principalPlan.price.mm}/mo</span>) : (<span className='text-[1.5rem] text-[--marine_blue]'>${principalPlan.price.yy}/yr</span>)
+            }
+          </div> 
+        </span>)
+        }
+        {/* this is a line to separate plan of plans alternative */}
+        <div className='w-[100%] h-1 bg-gray-300'></div>
+        {/* in here going to show plans alternative */}
+
+        { optionalPlan?.map((item,index)=>{
+          return (<div className='w-[100%] h-auto py-3 flex justify-between' key={index}>
+          <span className='text-[1.4rem] ' >{item?.name}</span>
+          <span className='text-[1.5rem] text-[--marine_blue]'>+{opChoose.step2.planBill.mm ? `$${item?.price.mm}/mo`: `$${item?.price.yy}/yr`}</span>
+        </div>)
+        })
+          
+        }
+      </div>
+      <div className='w-[100%] h-auto py-3 flex justify-between '>
+      <span className='text-[1.5rem] '>Total {opChoose.step2.planBill.mm ? '(per month)' : '(per year)' }</span>
+      <span className='text-[1.6rem] text-blue-800 font-bold '>{opChoose.step2.planBill.mm && '+'}${totalBill}{opChoose.step2.planBill.mm ? '/mo' : '/yr' }</span>
+
+      </div>
+    </form>)
       }
     </>
 

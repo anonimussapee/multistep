@@ -15,16 +15,18 @@ const App = () => {
       <div className='main--all-container '>
         {/* this container have a buttons and header image */}
         <div className='main--slidebar-container '>
-          <div className=' principal_image img_2 min-w-[320px]  '></div>
-          {/* this container have a few buttons to complete a necessary form */}
-          <div className='buttons-container flex justify-center gap-10  smMax:w-[300px] smMax:h-[65px]'>
-            
-            <Steps step={step}  number={1} stepNumber={'Step 1'} stepName={'YOUR INFO'}/>
-            <Steps step={step}  number={2} stepNumber={'Step 2'} stepName={'SELECT PLAN'}/>
-            <Steps step={step}  number={3} stepNumber={'Step 3'} stepName={'ADD ONS'}/>
-            <Steps step={step}  number={4} stepNumber={'Step 4'} stepName={'SUMMARY'}/>
+          <div className=' principal_image img_2  relative '>
+                      {/* this container have a few buttons to complete a necessary form */}
+            <div className='buttons-container   '>
+              
+              <Steps step={step}  number={1} stepNumber={'Step 1'} stepName={'YOUR INFO'}/>
+              <Steps step={step}  number={2} stepNumber={'Step 2'} stepName={'SELECT PLAN'}/>
+              <Steps step={step}  number={3} stepNumber={'Step 3'} stepName={'ADD ONS'}/>
+              <Steps step={step}  number={4} stepNumber={'Step 4'} stepName={'SUMMARY'}/>
 
+            </div>
           </div>
+
 
         </div>
         {/* this container have a logic to show form */}
