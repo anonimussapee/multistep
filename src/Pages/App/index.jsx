@@ -12,9 +12,9 @@ const App = () => {
   return (
     <section className='w-full h-[100vh] text-[1.8rem] flex justify-center items-center'>
       {/* this container have all elements and have the responsability of will change of mediaqueries */}
-      <div className='main--all-container relative'>
+      <div className='main--all-container '>
         {/* this container have a buttons and header image */}
-        <div className='main--slidebar-container relative'>
+        <div className='main--slidebar-container '>
           <div className=' principal_image img_2 min-w-[320px]  '></div>
           {/* this container have a few buttons to complete a necessary form */}
           <div className='buttons-container flex justify-center gap-10  smMax:w-[300px] smMax:h-[65px]'>

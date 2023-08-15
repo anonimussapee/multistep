@@ -49,8 +49,8 @@ form::-webkit-scrollbar, form div::-webkit-scrollbar{
   background-color: #bfe2fd;
 }
 .form-Container{
-  width: 90%;
-  height: 72vh;
+  width: 80vw;
+  height: 80vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -58,14 +58,19 @@ form::-webkit-scrollbar, form div::-webkit-scrollbar{
   position: absolute;
   background-color: white;
   top: 9rem;
-  left: calc(50% - 45%);
+  left: calc(50% - 40vw);
   border-radius: 12px;
   box-shadow: rgba(0, 0, 0, 0.515) 1px 1px 10px 0px ;
 }
 .main--all-container{
   height: 80vh;
 }
-/* colors */
+.buttons-container{
+  left:0;
+  top: 2rem ;
+  position: absolute;
+}
+
 
 @media (max-width:700px) {
   .buttons-container{
@@ -76,9 +81,23 @@ form::-webkit-scrollbar, form div::-webkit-scrollbar{
   .principal_image{
     background-image: url(../../assets/bg-sidebar-mobile.svg);
     height: 200px;
-    width: 100%;
+    width: 100vw;
   }
   .main--all-container{
     height: 100%;
+  }
+  .form-Container{
+    width: 90%;
+    height: 72vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: white;
+    top: 9rem;
+    left: calc(50% - 45%);
+    border-radius: 12px;
+    box-shadow: rgba(0, 0, 0, 0.515) 1px 1px 10px 0px ;
   }
 }

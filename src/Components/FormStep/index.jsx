@@ -57,7 +57,7 @@ const Form2 = ({opChoose, setOpChoose}) => {
 
       </div>
       {/* change plans toggle */}
-      <div className='planToggle w-[250px] h-[2.3rem] flex justify-evenly font-bold  '>
+      <div className='planToggle w-[250px] h-[2.3rem] flex justify-evenly font-bold  self-center'>
        <span className={`${opChoose.step2.planBill.mm ? 'text-[--marine_blue]': ''}`}  onClick={()=>{
           setOpChoose({...opChoose, step2:{...opChoose.step2 , planBill: {mm:true, yy:false} }})
          }}>Monthly</span>
