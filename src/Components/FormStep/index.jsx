@@ -6,23 +6,50 @@ const handleSubmit = (e) => {
   console.log('submit')
 }
 
-const Form1 = ({opChoose, setOpChoose}) => {
+const Form1 = ({opChoose, setOpChoose, error,setError}) => {
 
   return (
     <form onSubmit={handleSubmit}  className='w-[90%] h-[100%] overflow-y-scroll text-gray-500  flex flex-col gap-2 py-10 sm:w-[70%] sm:min-w-[380px]'>
       <h2 className='text-[2.4rem] sm:text-[3rem] font-extrabold text-[--marine_blue] '>Personal info</h2>
       <p className='line-normal'>Please provide your name, email, address, and phone number. </p>
       <label htmlFor="customer_name">
-        <span className='text-[--marine_blue] text-[1.6rem]'>Name</span>
-        <input type="text" name='customer_name' className='border-[1px] border-gray-400 w-[100%] p-3 rounded-lg ' placeholder='e.g. Stephen King' value={opChoose.step1.name} onChange={(e)=>setOpChoose({...opChoose, step1:{...opChoose.step1,name:e.target.value}})}/>
+        <div className={`w-[99%] ${error.step1 ? 'flex justify-between': ' '}`}>
+          <span className='text-[--marine_blue] text-[1.6rem]'>Name</span>
+          <span className={`text-[#e90f0f] text-[1.6rem] ${error.step1 ? 'visible': ' hidden '}`}>This field is required </span>
+        </div>
+        <input type="text" name='customer_name' className={` border-[1px] ${error.step1 ? 'border-red-600': 'border-gray-400 '} w-[100%] p-3 rounded-lg `} placeholder='e.g. Stephen King' value={opChoose.step1.name} onChange={(e)=>{
+          setError({
+            ...error,
+            step1:false
+          })
+          setOpChoose({...opChoose, step1:{...opChoose.step1,name:e.target.value}})
+          }}/>
       </label>
       <label htmlFor="customer_email">
-        <span className='text-[--marine_blue] text-[1.6rem]'>Email Address</span>
-        <input type="text" name='customer_email' className='border-[1px] border-gray-400 w-[100%] p-3 rounded-lg ' placeholder='e.g. stephenking@lorem.com' value={opChoose.step1.email} onChange={(e)=>setOpChoose({...opChoose, step1:{...opChoose.step1, email:e.target.value}})}/>
+        <div className={`w-[99%] ${error.step2 ? 'flex justify-between': ' '}`}>
+          <span className='text-[--marine_blue] text-[1.6rem]'>Email Address</span>
+          <span className={`text-[#e90f0f] text-[1.6rem] ${error.step2 ? 'visible': ' hidden '}`}>This field is required </span>  
+        </div>
+        <input type="text" name='customer_email' className={`border-[1px] ${error.step2 ? 'border-red-600': 'border-gray-400 '} w-[100%] p-3 rounded-lg `} placeholder='e.g. stephenking@lorem.com' value={opChoose.step1.email} onChange={(e)=>{
+           setError({
+            ...error,
+            step2:false
+          })
+          setOpChoose({...opChoose, step1:{...opChoose.step1, email:e.target.value}})
+          }}/>
       </label>
       <label htmlFor="customer_phone">
-        <span className='text-[--marine_blue] text-[1.6rem]'>Phone Number</span>
-        <input type="number" name='customer_phone' className='border-[1px] border-gray-400 w-[100%] p-3 rounded-lg ' placeholder='e.g.+1 234 567 890' value={opChoose.step1.number} onChange={(e)=>setOpChoose({...opChoose, step1:{...opChoose.step1,number:e.target.value}})}/>
+        <div className={`w-[99%] ${error.step3 ? 'flex justify-between': ' '}`}>
+          <span className='text-[--marine_blue] text-[1.6rem]'>Phone Number</span>
+          <span className={`text-[#e90f0f] text-[1.6rem] ${error.step3 ? 'visible': ' hidden '}`}>This field is required </span>    
+        </div>
+        <input type="number" name='customer_phone' className={`border-[1px] ${error.step3 ? 'border-red-600': 'border-gray-400 '} w-[100%] p-3 rounded-lg `} placeholder='e.g.+1 234 567 890' value={opChoose.step1.number} onChange={(e)=>{
+           setError({
+            ...error,
+            step3:false
+          })
+          setOpChoose({...opChoose, step1:{...opChoose.step1,number:e.target.value}})
+          }}/>
       </label>
     </form>
   )

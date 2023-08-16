@@ -5,7 +5,12 @@ import { Form1, Form2, Form3, Form4 } from '../../Components/FormStep'
 const useSteps = () => {
 
  
-  const [error, setError] = useState(false)
+  const [error, setError] = useState({
+    step1:false,
+    step2:false,
+    step3:false,
+
+  })
 
   const [opChoose, setOpChoose] = useState({
     step1:{
@@ -54,7 +59,7 @@ const useSteps = () => {
     if(emailCheck === true){
       stepChecking.email = true
     }
-    if((opChoose.step1.number).length > 7){
+    if((opChoose.step1.number).length > 5){
       stepChecking.number = true 
     }
 
@@ -78,7 +83,7 @@ const useSteps = () => {
     }
 
   const formSteps = {
-    step1 :<Form1 opChoose={opChoose} setOpChoose={setOpChoose}/>,
+    step1 :<Form1 opChoose={opChoose} setOpChoose={setOpChoose} error={error} setError={setError}/>,
     step2 :<Form2  opChoose={opChoose} setOpChoose={setOpChoose}/>,
     step3 :<Form3 plans={opChoose.step2.planBill}  opChoose={opChoose} setOpChoose={setOpChoose}/>,
     step4 :<Form4 opChoose={opChoose}  changePlan={changePlan}/>,
@@ -95,14 +100,41 @@ const useSteps = () => {
     
     // in here i verify if actual step is equal to totals step
     if((inStepNumber+1 < stepsInArray.length) && stepNeedData.email && stepNeedData.name && stepNeedData.number){
-      setError(false)
+      setError({...error})
       stepsInArray[inStepNumber][1] = false
       stepsInArray[inStepNumber+1][1] = true 
       setStep(Object.fromEntries (stepsInArray))
     }else if(!stepNeedData.email && !stepNeedData.name && !stepNeedData.number){
-      setError(true)
+
+      setError({ step1:true, step2:true, step3:true})
+
+    }else if(stepNeedData.email && !stepNeedData.name && !stepNeedData.number){
+
+      setError({ step1:true, step2:false, step3:true})
+
+    }else if(!stepNeedData.email && stepNeedData.name && !stepNeedData.number){
+
+      setError({ step1:false, step2:true, step3:true})
+
+    }else if(!stepNeedData.email && !stepNeedData.name && stepNeedData.number){
+
+      setError({ step1:true, step2:true, step3:false})
+
+    }else if(stepNeedData.email && stepNeedData.name && !stepNeedData.number){
+
+      setError({ step1:false, step2:false, step3:true})
+
+    }else if(!stepNeedData.email && !stepNeedData.name && stepNeedData.number){
+
+      setError({ step1:true, step2:false, step3:false})
+
+    }else if(!stepNeedData.email && stepNeedData.name && stepNeedData.number){
+
+      setError({ step1:false, step2:true, step3:false})
+
     }
   }
+
   const onBeforeButton = () => {
     const stepsInArray = Object.entries(step)
 

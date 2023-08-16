@@ -82,7 +82,9 @@ form::-webkit-scrollbar, form div::-webkit-scrollbar{
   color: white;
 }
 
-
+input{
+  cursor: pointer;
+}
 @media (max-width:700px) {
   .buttons-container{
     left: calc(50% - 150px);
