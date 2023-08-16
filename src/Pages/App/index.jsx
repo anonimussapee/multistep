@@ -32,15 +32,16 @@ const App = () => {
         {/* this container have a logic to show form */}
         <div className='form-Container'>
           {inStep}
+          <div className={`w-[90%] sm:w-[50vw] h-[60px] flex ${inStepNumber > 0 ? 'justify-between': 'justify-end'  } ${opChoose.step4.confirm  && 'hidden'}  absolute smMax:bottom-[-80px] sm:bottom-0`}>
+        
+          {inStepNumber > 0  ? (<ButtonChangeStep name='Go back' colorNone={true} action={onBeforeButton}/>) : null } 
+          {inStepNumber === (Object.entries(step)).length -1 ? ( <ButtonChangeStep name='Confirm' colorNone={false} action={onConfirm}/>) :( <ButtonChangeStep name='Next Step' colorNone={false} action={onNextButton}/>)}
+          
+          </div>
         </div>
 
       </div>
-      <div className={`w-[90%] h-[60px] flex ${inStepNumber > 0 ? 'justify-between': 'justify-end'  } ${opChoose.step4.confirm  && 'hidden'}  absolute bottom-0`}>
-        
-       {inStepNumber > 0  ? (<ButtonChangeStep name='Go back' colorNone={true} action={onBeforeButton}/>) : null } 
-       {inStepNumber === (Object.entries(step)).length -1 ? ( <ButtonChangeStep name='Confirm' colorNone={false} action={onConfirm}/>) :( <ButtonChangeStep name='Next Step' colorNone={false} action={onNextButton}/>)}
-       
-      </div>
+    
 
     </section>
   )
